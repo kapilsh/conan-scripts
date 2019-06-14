@@ -3,7 +3,7 @@
 # Build all permutations of third party libraries used by fornax
 
 
-LIBRARIES="google_benchmark cares flatbuffers gflags protobuf zlib openssl grpc bzip2 zmq cppzmq fmt tbb boost websocketpp"
+LIBRARIES="google_benchmark cares flatbuffers gflags protobuf zlib openssl grpc bzip2 zmq cppzmq fmt tbb boost websocketpp imgui glad glfw"
 HEADER_ONLY="eigen json spdlog catch2"
 
 RECIPE_DIR=$(dirname "$0")

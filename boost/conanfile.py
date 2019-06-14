@@ -79,8 +79,8 @@ class BoostConan(ConanFile):
 
     exports = 'patches/*', "VERSION.txt", "../gcc.py"
 
-    def __init__(self, output, runner, user=None, channel=None):
-        super().__init__(output, runner, user=None, channel=None)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.package_folder = None
 
     def source(self):
