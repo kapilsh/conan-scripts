@@ -19,10 +19,10 @@ class GRPCConan(ConanFile):
     description = "Google Protobuf Serialization Library."
     license = "Apache-2.0"
     requires = (f"gcc/{CURRENT_GCC_VERSION}@kapilsh/release",
-                f"protobuf/3.6.1@kapilsh/release",
-                f"cares/1.14.0@kapilsh/release",
-                f"gflags/2.2.1@kapilsh/release",
-                f"google_benchmark/1.4.0@kapilsh/release",
+                f"protobuf/3.10.1@kapilsh/release",
+                f"cares/1.15.0@kapilsh/release",
+                f"gflags/2.2.2@kapilsh/release",
+                f"google_benchmark/1.5.0@kapilsh/release",
                 f"zlib/1.2.11@kapilsh/release",
                 f"openssl/1.1.1@kapilsh/release")
     settings = {"os": ["Linux"],

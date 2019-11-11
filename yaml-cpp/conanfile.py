@@ -1,5 +1,5 @@
 from conans import ConanFile, CMake
-from conans.tools import unzip, download
+from conans.tools import unzip, download, collect_libs
 import os
 import shutil
 
@@ -39,5 +39,9 @@ class WebsocketppConan(ConanFile):
         pass
 
     def package_info(self):
+        self.cpp_info.libs = collect_libs(self)
+        self.env_info.LD_LIBRARY_PATH.append("{}/lib".format(
+            self.package_folder))
+        self.env_info.PATH.append(os.path.join(self.package_folder, "bin"))
         self.cpp_info.includedirs = ['include']
         self.env_info.CPATH.append("{}/include".format(self.package_folder))
