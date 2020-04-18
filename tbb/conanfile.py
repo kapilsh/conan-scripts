@@ -38,7 +38,7 @@ class ZmqConan(ConanFile):
         download("{}/{}".format(self.download_url, tar_file), tar_file)
         unzip(tar_file)
         os.unlink(tar_file)
-        shutil.move("tbb-{}".format(self.version), "tbb")
+        shutil.move("oneTBB-{}".format(self.version[1:]), "tbb")
 
     def build(self):
         extra = "" if self.options.shared else "extra_inc=big_iron.inc"

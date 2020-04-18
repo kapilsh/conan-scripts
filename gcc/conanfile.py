@@ -2,7 +2,7 @@ import os
 from conans import ConanFile
 
 
-class DvChainGccConan(ConanFile):
+class LocalGccConan(ConanFile):
     name = "gcc"
     description = "Locally installed GCC"
     with open(os.path.join(os.path.dirname(os.path.realpath(
@@ -16,9 +16,12 @@ class DvChainGccConan(ConanFile):
     generators = "virtualenv"
     exports = "VERSION.txt"
 
-    gcc_dir = os.path.expanduser('~/local/gcc{}'.format(version.replace(".", "")))
+    gcc_dir = os.path.expanduser('~/local/gcc{}'.format(
+        version.replace(".", ""))).strip("\n")
 
     def build(self):
+        print(self.gcc_dir)
+        os.listdir(self.gcc_dir)
         self.settings.remove("build_type")
         self.settings.remove("compiler")
 

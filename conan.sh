@@ -7,7 +7,7 @@ LIBRARIES="google_benchmark cares flatbuffers gflags protobuf zlib openssl grpc 
 HEADER_ONLY="eigen json spdlog catch2"
 
 RECIPE_DIR=$(dirname "$0")
-RECIPE_DIR=$(realpath ${RECIPE_DIR})
+RECIPE_DIR=$(realpath "${RECIPE_DIR}")
 
 KAPILSH_REPO=kapilsh/release
 
@@ -48,10 +48,10 @@ then
     echo "BUILDING GCC"
     echo "======================================================="
 
-    cd ${RECIPE_DIR}/gcc
+    cd "${RECIPE_DIR}"/gcc || exit 1
     conan export . ${KAPILSH_REPO} || exit 1
-    PKG_NAME="gcc/$(cat ${RECIPE_DIR}/gcc/VERSION.txt)@${KAPILSH_REPO}"
-    conan install ${PKG_NAME} --build gcc || exit 1
+    PKG_NAME="gcc/$(cat "${RECIPE_DIR}"/gcc/VERSION.txt)@${KAPILSH_REPO}"
+    conan install "${PKG_NAME}" --build gcc || exit 1
     exit 0
 fi
 
@@ -63,10 +63,10 @@ then
         echo "BUILDING HEADER ONLY ${P} "
         echo "======================================================="
 
-        cd ${RECIPE_DIR}/${P}
+        cd "${RECIPE_DIR}"/"${P}" || exit 1
         conan export . ${KAPILSH_REPO} || exit 1
-        PKG_NAME="${P}/$(cat ${RECIPE_DIR}/${P}/VERSION.txt)@${KAPILSH_REPO}"
-        conan install ${PKG_NAME} --build ${P} || exit 1
+        PKG_NAME="${P}/$(cat "${RECIPE_DIR}"/"${P}"/VERSION.txt)@${KAPILSH_REPO}"
+        conan install "${PKG_NAME}" --build "${P}" || exit 1
     done
 fi
 
@@ -79,12 +79,13 @@ then
         echo "BUILDING LIBRARY ${P} "
         echo "======================================================="
 
-        cd ${RECIPE_DIR}/${P}
+        cd "${RECIPE_DIR}"/"${P}" || exit 1
         conan export . ${KAPILSH_REPO} || exit 1
+        # shellcheck disable=SC2043
         for BT in Release
         do
-            PKG_NAME="${P}/$(cat ${RECIPE_DIR}/${P}/VERSION.txt)@${KAPILSH_REPO}"
-            conan install ${PKG_NAME} --build ${P} \
+            PKG_NAME="${P}/$(cat "${RECIPE_DIR}"/"${P}"/VERSION.txt)@${KAPILSH_REPO}"
+            conan install "${PKG_NAME}" --build "${P}" \
                 -sbuild_type=${BT} \
                 --profile=../build.profile || exit 1
         done
@@ -92,4 +93,4 @@ then
 fi
 
 
-cd ${RECIPE_DIR}
+cd "${RECIPE_DIR}" || exit 1
