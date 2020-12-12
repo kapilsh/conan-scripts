@@ -19,13 +19,13 @@ class EigenConan(ConanFile):
     license = "http://eigen.tuxfamily.org/index.php?title=Main_Page#License"
 
     def source(self):
-        tarball = "{}.tar.bz2".format(self.version)
-        os.system("wget {}".format(
-            "https://bitbucket.org/eigen/eigen/get/{}".format(tarball)))
+        tarball = "eigen-{}.tar.gz".format(self.version, self.version)
+        os.system(
+            "wget https://gitlab.com/libeigen/eigen/-/archive/{}/{}".format(
+                self.version, tarball))
         unzip(tarball)
         eigen_reg = re.compile("eigen")
-        eigen_dir = [x for x in os.listdir(os.curdir) if
-                     eigen_reg.search(x)][0]
+        eigen_dir = [x for x in os.listdir(os.curdir) if eigen_reg.search(x)][0]
         shutil.move(eigen_dir, "Eigen")
         os.unlink(tarball)
 
